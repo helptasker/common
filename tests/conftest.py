@@ -31,6 +31,11 @@ def api_v2():
     return {'api_version': 2}
 
 
+@app.get('/exception')
+def exception():
+    raise Exception('test')
+
+
 @pytest.fixture()
 async def client() -> AsyncGenerator[httpx.AsyncClient, None]:
     headers = {'x-real-ip': '127.0.0.1'}

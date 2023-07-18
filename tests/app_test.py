@@ -26,3 +26,8 @@ async def test_cxt_api_v2(client: httpx.AsyncClient):
     response = await client.get(url='/api/v2/test')
     assert response.status_code == 200
     assert response.json().get('api_version') == 2
+
+
+async def test_exception(client: httpx.AsyncClient):
+    response = await client.get(url='/exception')
+    assert response.status_code == 500
