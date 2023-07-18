@@ -30,6 +30,8 @@ class Middleware(BaseHTTPMiddleware):
         # API Version
         if 'v1' in request.url.path.split('/', 3):
             api_version_token = cxt_api_version.set(1)
+        elif 'v2' in request.url.path.split('/', 3):
+            api_version_token = cxt_api_version.set(1)
 
         path = request.scope.get('path')
         method = request.scope.get('method')
@@ -95,76 +97,3 @@ class Middleware(BaseHTTPMiddleware):
         cxt_api_version.reset(api_version_token)
         cxt_request_id.reset(cxt_request_id_token)
         return response
-
-
-# class UsefulMiddleware:
-#     def __init__(self, app):
-#         self.app = app
-#
-#     async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
-#         if scope['type'] not in ('http',):  # pragma: no cover
-#             await self.app(scope, receive, send)
-#             return
-#
-#         # Timer
-#         start_timer = time.monotonic()
-#
-#         # IP
-#         cxt_ip_token = cxt_ip.set('0.0.0.0')
-#
-#         request = Request(scope)
-#
-#         if ip := request.headers.get('x-real-ip', request.headers.get('x-forwarded-for')):
-#             cxt_ip_token = cxt_ip.set(ip)
-#
-#         # Request ID
-#         cxt_request_id_token = cxt_request_id.set(request.headers.get('request-id', str(uuid4())))
-#
-#         # API Version
-#         if 'v1' in request.url.path.split('/', 3):
-#             api_version_token = cxt_api_version.set(1)
-#
-#         path = request.scope.get('path')
-#         method = request.scope.get('method')
-#
-#         with trace.get_tracer(settings.app_name).start_as_current_span(f'{method} {path}') as span:
-#             try:
-#                 await self.app(scope, receive, send)
-#             except Exception as err:
-#                 if settings.environment == Environment.development:  # pragma: no cover
-#                     traceback.print_exc()
-#
-#                     response = ORJSONResponse(
-#                         status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-#                         content={'error': 'Internal server error'},
-#                     )
-#                     span_status_code = Status(status_code=StatusCode.ERROR, description=f'{err}')
-#                     span.record_exception(exception=err)
-#
-#                     await response(scope, receive, send)
-#             else:
-#                 span_status_code = Status(status_code=StatusCode.OK)
-#
-#             # Setting the status code
-#             span.set_status(span_status_code)
-#
-#             async def send_wrapper(message: Message) -> None:
-#                 # ... Do something
-#                 await send(message)
-#
-#             await self.app(scope, receive, send_wrapper)
-
-# Setting attributes for trace
-# span.set_attributes(
-#     {
-#         SpanAttributes.HTTP_SCHEME: request.scope.get('scheme', 'n/a'),
-#         SpanAttributes.HTTP_URL: request.url.path,
-#         SpanAttributes.HTTP_CLIENT_IP: cxt_ip.get() or '0.0.0.0',
-#         SpanAttributes.HTTP_USER_AGENT: request.headers.get('user-agent', 'n/a'),
-#         SpanAttributes.HTTP_METHOD: request.method,
-#         SpanAttributes.HTTP_STATUS_CODE: response.status_code,
-#         SpanAttributes.HTTP_RESPONSE_CONTENT_LENGTH: int(response.headers.get('content-length', 0)),
-#         'api.version': cxt_api_version.get(),
-#         'request_id': cxt_request_id.get() or '',
-#     },
-# )

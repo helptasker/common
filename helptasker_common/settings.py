@@ -31,7 +31,7 @@ class Scheme(str, Enum):
 
 
 class Settings(BaseSettings):
-    app_name: str = 'FastID'
+    app_name: str = 'FastID - Common'
     """ Application name """
 
     log_name: str = app_name
@@ -55,6 +55,8 @@ class Settings(BaseSettings):
     """ Maximum number of allowable connections """
 
     # Tempo server
+    tempo_enable: bool = False
+
     tempo_scheme: Scheme = Scheme.http
     """Tempo scheme http or https"""
 

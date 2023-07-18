@@ -15,10 +15,10 @@ resource = Resource(attributes={'service.name': settings.app_name})
 
 trace.set_tracer_provider(TracerProvider(resource=resource))
 
-if settings.environment == Environment.development:
-    devnull = open(os.devnull, 'w')
-    processor = BatchSpanProcessor(ConsoleSpanExporter(out=devnull))
-else:  # pragma: no cover
+devnull = open(os.devnull, 'w')
+processor = BatchSpanProcessor(ConsoleSpanExporter(out=devnull))
+
+if settings.tempo_enable:  # pragma: no cover
     processor = BatchSpanProcessor(
         OTLPSpanExporter(endpoint=f'{settings.tempo_scheme.value}://{settings.tempo_host}:{settings.tempo_port}'),
     )

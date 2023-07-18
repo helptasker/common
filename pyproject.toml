@@ -51,7 +51,7 @@ testpaths = [
 ]
 env = [
     "PYTEST = True",
-    "CORS_ENABLE = True",
+#    "ENVIRONMENT = DEVELOPMENT",
 ]
 filterwarnings = [
     "ignore::DeprecationWarning:pkg_resources.*",
