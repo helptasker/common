@@ -158,51 +158,49 @@ jobs:
         run: |
           poetry run mypy .
 
-#  test:
-#    name: "Testing code"
-#    runs-on: ubuntu-latest
-#    needs: [pre-commit, black, isort, ruff, mypy]
-#    timeout-minutes: 5
-#    env:
-#      DEBUG: True
-#    steps:
-#      - name: Checkout repository
-#        uses: actions/checkout@v3
-#
-#      - name: Set up Python ${{ env.PYTHON_VERSION }}
-#        uses: actions/setup-python@v4
-#        with:
-#          python-version: ${{ env.PYTHON_VERSION }}
-#          check-latest: true
-#
-#      - name: Cache
-#        uses: actions/cache@v3
-#        with:
-#          path: ~/.cache/pypoetry
-#          key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
-#          restore-keys: |
-#            ${{ runner.os }}-poetry-
-#
-#      - name: "Installing poetry"
-#        run: pip install poetry
-#
-#      - name: "Installing dependencies"
-#        run: poetry install
-#
-#      - name: "Testing code"
-#        run: |
-#          poetry run coverage run -m pytest
-#          poetry run coverage html --show-contexts --title="Iperon API"
-#          poetry run coverage xml
-#
-#      - name: "Upload report"
-#        uses: actions/upload-artifact@v3
-#        with:
-#          name: coverage.zip
-#          path: |
-#            htmlcov/
-#          retention-days: 14
-#
-#      - name: "Report coverage"
-#        run: |
-#          poetry run coverage report --fail-under=100
+  test:
+    name: "Testing code"
+    runs-on: ubuntu-latest
+    needs: [pre-commit, black, isort, ruff, mypy]
+    timeout-minutes: 5
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python ${{ env.PYTHON_VERSION }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          check-latest: true
+
+      - name: Cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pypoetry
+          key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-poetry-
+
+      - name: "Installing poetry"
+        run: pip install poetry
+
+      - name: "Installing dependencies"
+        run: poetry install
+
+      - name: "Testing code"
+        run: |
+          poetry run coverage run -m pytest
+          poetry run coverage html --show-contexts --title="Iperon API"
+          poetry run coverage xml
+
+      - name: "Upload report"
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage.zip
+          path: |
+            htmlcov/
+          retention-days: 14
+
+      - name: "Report coverage"
+        run: |
+          poetry run coverage report --fail-under=100
