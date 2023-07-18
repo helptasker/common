@@ -190,7 +190,7 @@ jobs:
       - name: "Testing code"
         run: |
           poetry run coverage run -m pytest
-          poetry run coverage html --show-contexts --title="Iperon API"
+          poetry run coverage html --show-contexts --title="Helptasker common"
           poetry run coverage xml
 
       - name: "Upload report"
