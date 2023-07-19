@@ -199,7 +199,12 @@ jobs:
           name: coverage.zip
           path: |
             htmlcov/
-          retention-days: 14
+          retention-days: 90
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
       - name: "Report coverage"
         run: |

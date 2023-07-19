@@ -55,15 +55,16 @@ class Settings(BaseSettings):
     """ Maximum number of allowable connections """
 
     # Tempo server
-    tempo_enable: bool = False
+    opentelemetry_enable: bool = False
+    """ Enables or disables sending """
 
-    tempo_scheme: Scheme = Scheme.http
+    opentelemetry_scheme: Scheme = Scheme.http
     """Tempo scheme http or https"""
 
-    tempo_host: str = 'tempo'
+    opentelemetry_host: str = 'tempo'
     """Tempo host address as one of the following: an IP address or a domain name"""
 
-    tempo_port: int = 4317
+    opentelemetry_port: int = 4317
     """Port number to connect to at the server host"""
 
 

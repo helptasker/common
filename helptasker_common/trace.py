@@ -9,7 +9,7 @@ from opentelemetry.sdk.resources import Resource
 from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import BatchSpanProcessor, ConsoleSpanExporter
 
-from .settings import Environment, settings
+from .settings import settings
 
 resource = Resource(attributes={'service.name': settings.app_name})
 
@@ -18,9 +18,12 @@ trace.set_tracer_provider(TracerProvider(resource=resource))
 devnull = open(os.devnull, 'w')
 processor = BatchSpanProcessor(ConsoleSpanExporter(out=devnull))
 
-if settings.tempo_enable:  # pragma: no cover
+if settings.opentelemetry_enable:  # pragma: no cover
     processor = BatchSpanProcessor(
-        OTLPSpanExporter(endpoint=f'{settings.tempo_scheme.value}://{settings.tempo_host}:{settings.tempo_port}'),
+        OTLPSpanExporter(
+            endpoint=f'{settings.opentelemetry_scheme.value}://'
+            f'{settings.opentelemetry_host}:{settings.opentelemetry_port}',
+        ),
     )
 
 tracer_provider: TracerProvider = trace.get_tracer_provider()  # type: ignore
