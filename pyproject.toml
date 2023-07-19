@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "helptasker-common"
-version = "0.0.1"
+version = "0.0.2"
 description = "Shared Library"
 authors = [
     "Kostya Ten <kostya@yandex.com>"
