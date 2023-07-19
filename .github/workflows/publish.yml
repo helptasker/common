@@ -1,10 +1,9 @@
 name: Publish
 
 on:
-  push:
-  pull_request:
-    branches:
-      - pypi
+  release:
+    types:
+      - published
 
 env:
   PYTHON_VERSION: 3.11.4 # See https://github.com/actions/python-versions/blob/main/versions-manifest.json
@@ -47,6 +46,3 @@ jobs:
 
       - name: Publish package distributions to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          skip-existing: true
-          repository-url: https://test.pypi.org/legacy/
