@@ -31,7 +31,7 @@ class Middleware(BaseHTTPMiddleware):
         if 'v1' in request.url.path.split('/', 3):
             api_version_token = cxt_api_version.set(1)
         elif 'v2' in request.url.path.split('/', 3):
-            api_version_token = cxt_api_version.set(1)
+            api_version_token = cxt_api_version.set(2)
 
         path = request.scope.get('path')
         method = request.scope.get('method')
