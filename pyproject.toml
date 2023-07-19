@@ -5,11 +5,17 @@ description = "Shared Library"
 authors = [
     "Kostya Ten <kostya@yandex.com>"
 ]
+repository = "https://github.com/helptasker/common/"
+keywords = ["fastapi", "pydantic", "asyncio"]
+homepage = "https://github.com/helptasker/common/"
+documentation = "https://github.com/helptasker/common/"
+
 
 classifiers = [
     "Intended Audience :: Information Technology",
     "Intended Audience :: System Administrators",
     "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python",
     "Topic :: Internet",
@@ -23,17 +29,9 @@ classifiers = [
     "Framework :: AsyncIO",
     "Framework :: FastAPI",
     "Framework :: Pydantic",
-    "Framework :: Pydantic :: 1",
+    "Framework :: Pydantic :: 2",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
-    "Programming Language :: Python :: 3 :: Only",
-    "Programming Language :: Python :: 3.7",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
-    "Topic :: Internet :: WWW/HTTP :: HTTP Servers",
-    "Topic :: Internet :: WWW/HTTP",
 ]
 readme = "README.md"
 packages = [
