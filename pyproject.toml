@@ -3,7 +3,7 @@ name = "helptasker-common"
 version = "0.0.1"
 description = "Shared Library"
 authors = [
-    { name = "Kostya Ten", email = "kostya@yandex.com" },
+    { name = "Kostya Ten", email = "kostya@yandex.com" }
 ]
 classifiers = [
     "Intended Audience :: Information Technology",
