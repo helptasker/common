@@ -7,13 +7,12 @@ from fastapi import FastAPI
 
 from helptasker_common import middlewares
 from helptasker_common.http_base_client import http_base_client
+from helptasker_common.instrumentation import HelpTaskerCommonFastApiInstrumentator
 from helptasker_common.logger import logger_init
 
 app = FastAPI()
 
-app.add_middleware(middlewares.Middleware)
-
-logger_init()
+HelpTaskerCommonFastApiInstrumentator().instrument(app)
 
 
 @app.get('/')
