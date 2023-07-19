@@ -6,6 +6,9 @@ on:
     branches:
       - pypi
 
+env:
+  PYTHON_VERSION: 3.11.4 # See https://github.com/actions/python-versions/blob/main/versions-manifest.json
+
 jobs:
   pypi-publish:
     name: Upload release to PyPI
