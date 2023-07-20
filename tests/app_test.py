@@ -31,3 +31,16 @@ async def test_cxt_api_v2(client: httpx.AsyncClient):
 async def test_exception(client: httpx.AsyncClient):
     response = await client.get(url='/exception')
     assert response.status_code == 500
+
+
+async def test_cors(client: httpx.AsyncClient, caplog):
+    response = await client.options(
+        url='/',
+        headers={'Origin': 'http://localhost.local/', 'Access-Control-Request-Method': 'GET'},
+    )
+    assert response.headers.get('access-control-allow-methods') == 'GET'
+
+
+async def test_trusted(client: httpx.AsyncClient, caplog):
+    response = await client.get(url='http://localhost2.local/')
+    assert response.status_code == 400

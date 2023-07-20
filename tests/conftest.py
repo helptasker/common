@@ -12,7 +12,11 @@ from helptasker_common.logger import logger_init
 
 app = FastAPI()
 
-HelpTaskerCommonFastApiInstrumentator(cors_enable=True).instrument(app)
+HelpTaskerCommonFastApiInstrumentator(
+    cors_enable=True,
+    trusted_host_enable=True,
+    trusted_host_allowed_hosts=['localhost.local'],
+).instrument(app)
 
 
 @app.get('/')
