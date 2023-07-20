@@ -19,7 +19,7 @@ class HelpTaskerCommonFastApiInstrumentator:
         cors_allow_methods: typing.Sequence[str] = ('GET',),
         cors_allow_headers: typing.Sequence[str] = (),
         cors_max_age: int = 600,
-        trusted_host_enable: bool = True,
+        trusted_host_enable: bool = False,
         trusted_host_allowed_hosts: typing.Sequence[str] | None = (),
         healthcheck_enable: bool = False,
     ):
