@@ -4,6 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
 
+from . import handlers
 from .logger import logger_init
 from .middlewares import Middleware
 
@@ -20,6 +21,7 @@ class HelpTaskerCommonFastApiInstrumentator:
         cors_max_age: int = 600,
         trusted_host_enable: bool = True,
         trusted_host_allowed_hosts: typing.Sequence[str] | None = (),
+        healthcheck_enable: bool = False,
     ):
         self.logger_load = logger_load
         self.cors_enable = cors_enable
@@ -30,6 +32,7 @@ class HelpTaskerCommonFastApiInstrumentator:
         self.cors_max_age = cors_max_age
         self.trusted_host_enable = trusted_host_enable
         self.trusted_host_allowed_hosts = trusted_host_allowed_hosts
+        self.healthcheck_enable = healthcheck_enable
 
     def instrument(self, app: FastAPI):
         if self.logger_load:
@@ -52,5 +55,8 @@ class HelpTaskerCommonFastApiInstrumentator:
                 TrustedHostMiddleware,
                 allowed_hosts=self.trusted_host_allowed_hosts,
             )
+
+        if self.healthcheck_enable:
+            app.include_router(handlers.healthcheck.router)
 
         return self

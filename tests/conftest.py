@@ -1,14 +1,11 @@
 from typing import AsyncGenerator
 
-import fastapi
 import httpx
 import pytest
 from fastapi import FastAPI
 
-from helptasker_common import middlewares
 from helptasker_common.http_base_client import http_base_client
 from helptasker_common.instrumentation import HelpTaskerCommonFastApiInstrumentator
-from helptasker_common.logger import logger_init
 
 app = FastAPI()
 
@@ -17,6 +14,7 @@ HelpTaskerCommonFastApiInstrumentator(
     cors_max_age=300,
     trusted_host_enable=True,
     trusted_host_allowed_hosts=['localhost.local'],
+    healthcheck_enable=True,
 ).instrument(app)
 
 
