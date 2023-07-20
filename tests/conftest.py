@@ -14,6 +14,7 @@ app = FastAPI()
 
 HelpTaskerCommonFastApiInstrumentator(
     cors_enable=True,
+    cors_max_age=300,
     trusted_host_enable=True,
     trusted_host_allowed_hosts=['localhost.local'],
 ).instrument(app)

@@ -39,6 +39,7 @@ async def test_cors(client: httpx.AsyncClient, caplog):
         headers={'Origin': 'http://localhost.local/', 'Access-Control-Request-Method': 'GET'},
     )
     assert response.headers.get('access-control-allow-methods') == 'GET'
+    assert response.headers.get('access-control-max-age') == '300'
 
 
 async def test_trusted(client: httpx.AsyncClient, caplog):
