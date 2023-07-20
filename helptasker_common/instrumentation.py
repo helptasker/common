@@ -17,6 +17,7 @@ class HelpTaskerCommonFastApiInstrumentator:
         cors_allow_credentials: bool = False,
         cors_allow_methods: typing.Sequence[str] = ('GET',),
         cors_allow_headers: typing.Sequence[str] = (),
+        cors_max_age: int = 600,
         trusted_host_enable: bool = True,
         trusted_host_allowed_hosts: typing.Sequence[str] | None = (),
     ):
@@ -26,6 +27,7 @@ class HelpTaskerCommonFastApiInstrumentator:
         self.cors_allow_credentials = cors_allow_credentials
         self.cors_allow_methods = cors_allow_methods
         self.cors_allow_headers = cors_allow_headers
+        self.cors_max_age = cors_max_age
         self.trusted_host_enable = trusted_host_enable
         self.trusted_host_allowed_hosts = trusted_host_allowed_hosts
 
@@ -42,6 +44,7 @@ class HelpTaskerCommonFastApiInstrumentator:
                 allow_credentials=self.cors_allow_credentials,
                 allow_methods=self.cors_allow_methods,
                 allow_headers=self.cors_allow_headers,
+                max_age=self.cors_max_age,
             )
 
         if self.trusted_host_enable:
